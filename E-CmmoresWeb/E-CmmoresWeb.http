@@ -1,0 +1,6 @@
+@E_CmmoresWeb_HostAddress = http://localhost:5110
+
+GET {{E_CmmoresWeb_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

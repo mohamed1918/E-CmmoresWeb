@@ -1,4 +1,8 @@
 
+using DomainLayer.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Data.Contexts;
+
 namespace E_CmmoresWeb
 {
     public class Program
@@ -14,8 +18,25 @@ namespace E_CmmoresWeb
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<StoreDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+                    
+            builder.Services.AddScoped<IDataSeeding, IDataSeeding>();
+
             #endregion
+
             var app = builder.Build();
+
+            #region Data Seeding
+            var Scope = app.Services.CreateScope();
+
+            var seed = Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
+
+            seed.DataSeed();
+            #endregion
 
             #region Configure the HTTP request pipeline.
             // Configure the HTTP request pipeline.

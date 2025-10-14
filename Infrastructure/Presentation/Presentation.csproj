@@ -9,5 +9,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ServiceAbstration\ServiceAbstration.csproj" />
   </ItemGroup>
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.0" />
+	</ItemGroup>
 
 </Project>

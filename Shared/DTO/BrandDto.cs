@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DomainLayer.Contracts
+namespace Shared.DTO
 {
-    public interface IDataSeeding
+    public class BrandDto
     {
-        Task DataSeedAsync();
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
     }
 }

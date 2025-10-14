@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_CmmoresWeb.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
     public class ProductController : ControllerBase
     {
         [HttpGet("{id}")]

@@ -1,7 +1,12 @@
 
 using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Persistence;
 using Persistence.Data.Contexts;
+using Persistence.Repositories;
+using Service;
+using Service.MappingProfiles;
+using ServiceAbstration;
 
 namespace E_CmmoresWeb
 {
@@ -24,8 +29,10 @@ namespace E_CmmoresWeb
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
                     
-            builder.Services.AddScoped<IDataSeeding, IDataSeeding>();
-
+            builder.Services.AddScoped<IDataSeeding, DataSeeding>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddAutoMapper(config => config.AddProfile(new ProductProfile()),typeof(Service.AssemblyReference).Assembly);
+            builder.Services.AddScoped<IServiceManager, ServiceManager>();
             #endregion
 
             var app = builder.Build();
@@ -35,7 +42,7 @@ namespace E_CmmoresWeb
 
             var seed = Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
-            seed.DataSeed();
+            seed.DataSeedAsync();
             #endregion
 
             #region Configure the HTTP request pipeline.
@@ -50,6 +57,7 @@ namespace E_CmmoresWeb
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
 
             app.MapControllers();
             #endregion

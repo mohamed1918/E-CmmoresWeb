@@ -33,6 +33,7 @@ namespace E_CmmoresWeb
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(config => config.AddProfile(new ProductProfile()),typeof(Service.AssemblyReference).Assembly);
             builder.Services.AddScoped<IServiceManager, ServiceManager>();
+            builder.WebHost.UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"));
             #endregion
 
             var app = builder.Build();

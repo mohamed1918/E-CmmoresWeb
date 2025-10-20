@@ -1,5 +1,5 @@
 ﻿using Shared;
-using Shared.DTO;
+using Shared.DTO.ProductModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace ServiceAbstration
     {
         Task<PaginatedResult<ProductDto>> GetAllProductsAsync(ProductQueryParams queryParams);
 
-        Task<ProductDto?> GetProductByIdAsync(int id);
+        Task<ProductDto> GetProductByIdAsync(int id);
 
         Task<IEnumerable<BrandDto>> GetAllBrandsAsync();
         

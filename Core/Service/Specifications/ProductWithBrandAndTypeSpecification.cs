@@ -1,4 +1,5 @@
-﻿using DomainLayer.Models;
+﻿
+using DomainLayer.Models.ProductModule;
 using Shared;
 using System;
 using System.Collections.Generic;

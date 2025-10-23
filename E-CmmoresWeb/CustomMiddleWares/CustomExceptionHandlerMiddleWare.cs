@@ -9,9 +9,9 @@ namespace E_CmmoresWeb.CustomMiddleWares
     public class CustomExceptionHandlerMiddleWare
     {
         private readonly RequestDelegate _next;
-        private readonly Logger<CustomExceptionHandlerMiddleWare> _logger;
+        private readonly ILogger<CustomExceptionHandlerMiddleWare> _logger;
 
-        public CustomExceptionHandlerMiddleWare(RequestDelegate next, Logger<CustomExceptionHandlerMiddleWare> logger)
+        public CustomExceptionHandlerMiddleWare(RequestDelegate next, ILogger<CustomExceptionHandlerMiddleWare> logger)
         {
             _next = next;
             _logger = logger;

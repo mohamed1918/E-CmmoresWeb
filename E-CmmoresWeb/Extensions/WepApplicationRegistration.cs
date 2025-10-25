@@ -14,6 +14,7 @@ namespace E_CmmoresWeb.Extensions
             var seed = Scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
             await seed.DataSeedAsync();
+            await seed.IdentityDataSeedAsync();
         }
 
         public static IApplicationBuilder UseCustomExceptionMiddlWare (this IApplicationBuilder app)

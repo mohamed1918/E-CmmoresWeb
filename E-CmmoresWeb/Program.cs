@@ -1,13 +1,16 @@
 
 using Azure;
 using DomainLayer.Contracts;
+using DomainLayer.Models.IdentityModule;
 using E_CmmoresWeb.CustomMiddleWares;
 using E_CmmoresWeb.Extensions;
 using E_CmmoresWeb.Factories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Data.Contexts;
+using Persistence.Identity;
 using Persistence.Repositories;
 using Service;
 using Service.MappingProfiles;
@@ -32,7 +35,9 @@ namespace E_CmmoresWeb
             builder.Services.AddAplicationServices();
             //builder.WebHost.UseWebRoot(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"));
             builder.Services.AddWebApllicationServices();
-           
+            builder.Services.AddJWTServices(builder.Configuration);
+
+
             #endregion
 
             var app = builder.Build();
@@ -61,7 +66,8 @@ namespace E_CmmoresWeb
             app.UseAuthorization();
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
             #endregion
 

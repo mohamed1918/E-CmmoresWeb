@@ -40,6 +40,8 @@ namespace E_CmmoresWeb.CustomMiddleWares
             httpContext.Response.StatusCode = ex switch
             {
                 NotFoundException => StatusCodes.Status404NotFound,
+                UnAutherizedException => StatusCodes.Status401Unauthorized,
+                BadRequestException  => StatusCodes.Status400BadRequest,
                 _ => StatusCodes.Status500InternalServerError
             };
 
@@ -48,7 +50,12 @@ namespace E_CmmoresWeb.CustomMiddleWares
             var response = new ErrorToReturn()
             {
                 StatusCode = httpContext.Response.StatusCode,
-                ErrorMessage = ex.Message
+                ErrorMessage = ex.Message,
+                Errors = ex switch
+                {
+                    BadRequestException badRequestException => badRequestException.Errors,
+                    _ => []
+                }
             };
 
             //var responseJson = JsonSerializer.Serialize(response);

@@ -14,5 +14,7 @@ namespace ServiceAbstration
 
         public IAuthenticationService AuthenticationService { get; }
 
+        public IOrderService OrderService { get; }
+
     }
 }

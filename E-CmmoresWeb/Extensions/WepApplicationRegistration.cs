@@ -1,6 +1,8 @@
 ﻿using DomainLayer.Contracts;
 using E_CmmoresWeb.CustomMiddleWares;
 using Microsoft.AspNetCore.Builder;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace E_CmmoresWeb.Extensions
@@ -26,7 +28,24 @@ namespace E_CmmoresWeb.Extensions
         public static IApplicationBuilder UseSwaggerMiddleWares (this IApplicationBuilder app)
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(options =>
+            {
+                options.ConfigObject = new ConfigObject()
+                {
+                    DisplayRequestDuration = true,
+                };
+
+                options.DocumentTitle ="E-Cmmores API ";
+
+                options.JsonSerializerOptions = new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                };
+
+                options.DocExpansion(DocExpansion.None);
+                options.EnableFilter();
+                options.EnablePersistAuthorization();
+            });
             return app;
         }
 
